@@ -2,13 +2,13 @@
 
 import BaseParser from './base'
 
-class YoukuParser extends BaseParser {
+export default class BilibiliParser extends BaseParser {
 
     parseArgsFromLink(link) {
         if(link.includes('bilibili.com/video/av')) {
             let result = link.match(/av[0-9_.]+/)
             if(result) {
-                let aid = result[0][]
+                let aid = result[0].slice(2)
                 return {
                     aid: aid
                 }
@@ -16,7 +16,7 @@ class YoukuParser extends BaseParser {
         }
     }
 
-    getIframeHtml(link) {
+    getEmbedTag(link) {
         let args = this.parseArgsFromLink(link)
         if(args) {
             let tpl = `<embed

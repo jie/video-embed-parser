@@ -18,7 +18,7 @@ module.exports = {
     'react': 'React',
     'react-dom': 'ReactDOM',
     'react-addons-css-transition-group': 'React.addons.CSSTransitionGroup',
-    'douban-editor': 'DoubanEditor'
+    'video-embed-parser': 'VideoEmbedParser'
   },
   plugins: [
     new webpack.DefinePlugin({

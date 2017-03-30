@@ -4,17 +4,16 @@
 
 import BaseParser from './base'
 
-
-class TudouParser extends BaseParser {
+export default class TudouParser extends BaseParser {
 
     parseArgsFromLink(link) {
         if(link.includes('tudou.com/listplay')) {
-            let result = link.match(/tudou.com\/listplay\/[A-Za-z0-9_.]+\/[A-Za-z0-9_.]+/)
+            let result = link.match(/tudou.com\/listplay\/[A-Za-z0-9_\-]+\/[A-Za-z0-9_\-]+/)
             if(result) {
-                let icode = result[0].split('/')[2]
+                let lcode = result[0].split('/')[2]
                 let code = result[0].split('/')[3]
                 return {
-                    icode: icode,
+                    lcode: lcode,
                     code: code,
                     type: 1
                 }
@@ -22,12 +21,12 @@ class TudouParser extends BaseParser {
         }
 
         if(link.includes('tudou.com/albumplay')) {
-            let result = link.match(/tudou.com\/albumplay\/[A-Za-z0-9_.]+\/[A-Za-z0-9_.]+/)
+            let result = link.match(/tudou.com\/albumplay\/[A-Za-z0-9_\-]+\/[A-Za-z0-9_\-]+/)
             if(result) {
-                let icode = result[0].split('/')[2]
+                let lcode = result[0].split('/')[2]
                 let code = result[0].split('/')[3]
                 return {
-                    icode: icode,
+                    lcode: lcode,
                     code: code,
                     type: 2
                 }
@@ -35,23 +34,23 @@ class TudouParser extends BaseParser {
         }
 
         if(link.includes('tudou.com/programs')) {
-            let result = link.match(/tudou.com\/programs\/[A-Za-z0-9_.]+/)
+            let result = link.match(/tudou.com\/programs\/view\/[A-Za-z0-9_\-]+/)
             if(result) {
-                let code = result[0].split('/')[2]
+                let code = result[0].split('/')[3]
                 return {
-                    icode: '',
+                    lcode: '',
                     code: code,
-                    type: 1
+                    type: 0
                 }
             }
         }
     }
 
-    getIframeHtml(link) {
+    getEmbedTag(link) {
         let args = this.parseArgsFromLink(link)
         if(args) {
             let tpl = `<iframe
-                src="http://www.tudou.com/programs/view/html5embed.action?type=${args.type}&code=${args.code}&lcode=${args.icode}"
+                src="http://www.tudou.com/programs/view/html5embed.action?type=${args.type}&code=${args.code}&lcode=${args.lcode}"
                 allowtransparency="true"
                 allowfullscreen="true"
                 allowfullscreenInteractive="true"

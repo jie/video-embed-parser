@@ -1,20 +1,25 @@
-const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer');
-const precss = require('precss');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
+const path = require('path')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const autoprefixer = require('autoprefixer')
+const precss = require('precss')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
   devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client',
-    './examples/editor',
+    './examples/index'
   ],
   output: {
     path: path.join(__dirname, '../dist'),
-    filename: 'douban-editor.js',
-    publicPath: '/dist/',
+    filename: 'video-embed-parser.js',
+    publicPath: '/dist/'
+  },
+  externals: {
+    'react': 'React',
+    'react-dom': 'ReactDOM',
+    'react-addons-css-transition-group': 'React.addons.CSSTransitionGroup',
   },
   module: {
     loaders: [
@@ -32,10 +37,10 @@ module.exports = {
         test: /\.(otf|eot|svg|ttf|woff|woff2).*$/,
         loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
       },
-    ],
+    ]
   },
   plugins: [
-    new ExtractTextPlugin("main.css"),
+    // new ExtractTextPlugin("main.css"),
     new HtmlWebpackPlugin({
       template: './examples/index.html',
       inject: true,
@@ -50,4 +55,4 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json'],
   },
-};
+}

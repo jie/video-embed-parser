@@ -1,10 +1,10 @@
-import Template as BilibiliTpl from './bilibili'
-import Template as YoukuTpl from './youku'
-import Template as TudouTpl from './tudou'
+import BilibiliParser from './bilibili'
+import YoukuParser from './youku'
+import TudouParser from './tudou'
 
 
 module.exports = {
-    BilibiliTpl: BilibiliTpl,
-    YoukuTpl: YoukuTpl,
-    TudouTpl: TudouTpl
+    BilibiliParser: BilibiliParser,
+    YoukuParser: YoukuParser,
+    TudouParser: TudouParser
 }

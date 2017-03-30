@@ -16,12 +16,6 @@ module.exports = {
     library: 'VideoEmbedParser',
     libraryTarget: 'var'
   },
-  externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM',
-    'react-addons-css-transition-group': 'React.addons.CSSTransitionGroup',
-    'draft-js': 'Draft'
-  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
@@ -32,29 +26,11 @@ module.exports = {
       compressor: {
         warnings: false,
       },
-    }),
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: [autoprefixer, precss],
-      }
-    }),
-    new ExtractTextPlugin("style.css")
+    })
   ],
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'babel-loader', exclude: /immutable\.js$|draftjs-utils\.js$/ },
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: "css-loader?modules&importLoaders=1&localIdentName=[local]!postcss-loader"
-        }),
-      },
-      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' },
-      {
-        test: /\.(otf|eot|svg|ttf|woff|woff2).*$/,
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
-      },
+      { test: /\.js$/, loader: 'babel-loader', exclude: /immutable\.js$|draftjs-utils\.js$/ }
     ],
   },
   resolve: {
