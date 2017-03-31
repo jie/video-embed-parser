@@ -46,21 +46,39 @@ export default class TudouParser extends BaseParser {
         }
     }
 
-    getEmbedTag(link) {
+    getEmbedTag(tagType, link) {
         let args = this.parseArgsFromLink(link)
+        let tpl = ''
         if(args) {
-            let tpl = `<iframe
-                src="http://www.tudou.com/programs/view/html5embed.action?type=${args.type}&code=${args.code}&lcode=${args.lcode}"
-                allowtransparency="true"
-                allowfullscreen="true"
-                allowfullscreenInteractive="true"
-                scrolling="no"
-                border="0"
-                frameborder="0"
-                style="width:${this.width}px;height:${this.height}px;">
-            </iframe>`
-            return tpl
+            switch(tagType) {
+                case 'iframe':
+                    tpl = `<iframe
+                        src="http://www.tudou.com/programs/view/html5embed.action?type=${args.type}&code=${args.code}&lcode=${args.lcode}"
+                        allowtransparency="true"
+                        allowfullscreen="true"
+                        allowfullscreenInteractive="true"
+                        scrolling="no"
+                        border="0"
+                        frameborder="0"
+                        style="width:${this.width}px;height:${this.height}px;">
+                    </iframe>`
+                    break
+                case 'embed':
+                    tpl = `<embed src="http://www.tudou.com/v/${args.code}/v.swf"
+                        type="application/x-shockwave-flash"
+                        allowscriptaccess="always"
+                        allowfullscreen="true"
+                        wmode="opaque"
+                        width="${this.width}"
+                        height="${this.height}"></embed>`
+                    break
+                case 'flash':
+                    tpl = `http://www.tudou.com/l/${args.code}/v.swf`
+                    break
+                default:
+                    console.warn(`unsupported tagtype: ${tagType}`)
+            }
         }
-        return ''
+        return tpl
     }
 }

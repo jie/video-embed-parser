@@ -16,21 +16,30 @@ export default class BilibiliParser extends BaseParser {
         }
     }
 
-    getEmbedTag(link) {
+    getEmbedTag(tagType, link) {
         let args = this.parseArgsFromLink(link)
+        let tpl = ''
         if(args) {
-            let tpl = `<embed
-                height="${this.height}"
-                width="${this.width}"
-                quality="high"
-                allowfullscreen="true"
-                type="application/x-shockwave-flash"
-                src="//static.hdslb.com/miniloader.swf"
-                flashvars="aid=${args.aid}&page=1"
-                pluginspage="//www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">
-            </embed>`
-            return tpl
+            switch(tagType) {
+                case 'embed':
+                    tpl = `<embed
+                        height="${this.height}"
+                        width="${this.width}"
+                        quality="high"
+                        allowfullscreen="true"
+                        type="application/x-shockwave-flash"
+                        src="//static.hdslb.com/miniloader.swf"
+                        flashvars="aid=${args.aid}&page=1"
+                        pluginspage="//www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">
+                    </embed>`
+                    break
+                case 'flash':
+                    tpl = `/static.hdslb.com/miniloader.swf?aid=${args.aid}&page=1`
+                    break
+                default:
+                    console.warn(`unsupported tagtype: ${tagType}`)
+            }
         }
-        return ''
+        return tpl
     }
 }

@@ -20,7 +20,7 @@ class MainApp extends React.Component {
 
     getEmbedTag =(e)=> {
         e.preventDefault()
-        let code = parser.getEmbedTag(this.state.link)
+        let code = parser.getEmbedTag( this.state.link)
         this.setState({videoCode: code})
         console.log(code)
         return code

@@ -1,7 +1,8 @@
 import {
     BilibiliParser,
     TudouParser,
-    YoukuParser
+    YoukuParser,
+    YoutubeParser
 } from './parser'
 
 
@@ -10,18 +11,22 @@ import {
 class VideoParser {
 
     constructor(props) {
+        this.tagType = props.tagType || 'embed'
         this.bilibili = new BilibiliParser({width: props.width, height: props.height})
         this.youku = new YoukuParser({width: props.width, height: props.height})
         this.tudou = new TudouParser({width: props.width, height: props.height})
+        this.tube = new YoutubeParser({width: props.width, height: props.height})
     }
 
     getEmbedTag(link) {
         if(link.includes('bilibili')) {
-            return this.bilibili.getEmbedTag(link)
+            return this.bilibili.getEmbedTag(this.tagType, link)
         } else if (link.includes('youku')) {
-            return this.youku.getEmbedTag(link)
+            return this.youku.getEmbedTag(this.tagType, link)
         } else if (link.includes('tudou')) {
-            return this.tudou.getEmbedTag(link)
+            return this.tudou.getEmbedTag(this.tagType, link)
+        } else if (link.includes('youtube')) {
+            return this.youtube.getEmbedTag(this.tagType, link)
         }
     }
 }
