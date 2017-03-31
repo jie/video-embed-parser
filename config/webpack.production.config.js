@@ -1,8 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer');
-const precss = require('precss');
 
 module.exports = {
   devtool: 'source-map',

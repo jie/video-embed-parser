@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import './example.css'
 import { VideoParser } from '../src'
 
 const parser = new VideoParser({width: 500, height: 400})
@@ -68,7 +67,7 @@ class MainApp extends React.Component {
     }
 
     render() {
-        return <div className="container">
+        return <div className="root container">
             <div className="row">
               <div className="col-lg-3"></div>
               <div className="col-lg-6">
