@@ -17,6 +17,7 @@ export default class BilibiliParser extends BaseParser {
     }
 
     getEmbedTag(tagType, link) {
+        console.log(tagType)
         let args = this.parseArgsFromLink(link)
         let tpl = ''
         if(args) {
@@ -32,6 +33,15 @@ export default class BilibiliParser extends BaseParser {
                         flashvars="aid=${args.aid}&page=1"
                         pluginspage="//www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">
                     </embed>`
+                    break
+                case 'iframe':
+                    tpl = `<iframe
+                        src="http://www.bilibili.com/html/html5player.html?aid=${args.aid}"
+                        width="640"
+                        height="480"
+                        frameborder="0"
+                        webkitallowfullscreen mozallowfullscreen allowfullscreen>
+                    </iframe>`
                     break
                 case 'flash':
                     tpl = `/static.hdslb.com/miniloader.swf?aid=${args.aid}&page=1`
