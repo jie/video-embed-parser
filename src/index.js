@@ -15,7 +15,7 @@ class VideoParser {
         this.bilibili = new BilibiliParser({width: props.width, height: props.height})
         this.youku = new YoukuParser({width: props.width, height: props.height})
         this.tudou = new TudouParser({width: props.width, height: props.height})
-        this.tube = new YoutubeParser({width: props.width, height: props.height})
+        this.youtube = new YoutubeParser({width: props.width, height: props.height})
     }
 
     getEmbedTag(link) {
