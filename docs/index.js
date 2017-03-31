@@ -4,6 +4,12 @@ import { VideoParser } from '../src'
 
 const parser = new VideoParser({width: 500, height: 400})
 
+function GetQueryString(name){
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
+}
+
 class MainApp extends React.Component {
     constructor(props) {
         super(props);
@@ -20,7 +26,9 @@ class MainApp extends React.Component {
     }
 
     getEmbedTag =(e)=> {
-        e.preventDefault()
+        if(e) {
+            e.preventDefault()
+        }
         let code = parser.getEmbedTag( this.state.link)
         this.setState({videoCode: code})
         console.log(code)
@@ -46,6 +54,18 @@ class MainApp extends React.Component {
             this.setState({showCode: 'none'})
         }
     }
+
+    componentDidMount() {
+        let link = GetQueryString('link')
+        if(link) {
+            this.setState({link: link}, () => {
+              setTimeout(() => {
+                this.getEmbedTag()
+              }, 0)
+            })
+        }
+    }
+
     render() {
         return <div className="container">
             <div className="row">
