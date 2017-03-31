@@ -19,8 +19,15 @@ class MainApp extends React.Component {
             link: '',
             videoCode: '',
             codeTag: '',
-            showCode: 'none'
+            showCode: 'none',
+            tagType: 'iframe',
+            width: 500,
+            height: 400
         }
+    }
+
+    getParser() {
+        return new VideoParser({tagType:this.state.tagType, width: this.state.width, height: this.state.height})
     }
 
     onChange =(e)=> {
@@ -31,9 +38,9 @@ class MainApp extends React.Component {
         if(e) {
             e.preventDefault()
         }
+        let parser = this.getParser()
         let code = parser.getEmbedTag(this.state.link)
         this.setState({videoCode: code})
-        console.log(code)
         return code
     }
 
@@ -59,13 +66,24 @@ class MainApp extends React.Component {
 
     componentDidMount() {
         let link = GetQueryString('link')
-        if(link) {
-            this.setState({link: link}, () => {
-              setTimeout(() => {
-                this.getEmbedTag()
-              }, 0)
-            })
-        }
+        let tagType = GetQueryString('tag')
+        let width = GetQueryString('width')
+        let height = GetQueryString('height')
+        this.setState({
+            width: width,
+            height: height,
+            tagType: tagType
+        }, () => {
+          setTimeout(() => {
+              if(link) {
+                  this.setState({link: link}, () => {
+                    setTimeout(() => {
+                      this.getEmbedTag()
+                    }, 0)
+                  })
+              }
+          }, 0)
+        })
     }
 
     render() {
