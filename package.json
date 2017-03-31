@@ -18,9 +18,12 @@
     "url": "git+https://github.com/jie/video-embed-parser"
   },
   "keywords": [
-    "draftjs",
-    "reactjs",
-    "editor"
+    "video embed",
+    "video embed parser",
+    "youtube",
+    "youku",
+    "tudou",
+    "bilibili"
   ],
   "author": "Yang",
   "license": "MIT",

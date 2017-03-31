@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { VideoParser } from '../src'
+import { VideoParser } from 'video-embed-parser'
 
 const parser = new VideoParser({width: 500, height: 400})
 
@@ -80,7 +80,6 @@ class MainApp extends React.Component {
               </div>
               <div className="col-lg-3"></div>
             </div>
-
             <div className="row" style={{marginTop: '30'}}>
                 <div className="col-lg-3"></div>
                 <div className="col-lg-6" style={{textAlign: 'center'}}>
