@@ -14,15 +14,17 @@ export default class YoukuParser extends BaseParser {
         }
     }
 
-    getEmbedTag(tagType, link) {
+    getEmbedTag(tagType, link, size) {
+        let width = size.width || this.width
+        let height = size.height || this.height
         let args = this.parseArgsFromLink(link)
         let tpl = ''
         if(args) {
             switch(tagType) {
                 case 'iframe':
                     tpl = `<iframe
-                       height=${this.height}
-                       width=${this.width}
+                       height=${height}
+                       width=${width}
                        src='http://player.youku.com/embed/${args.vid}'
                        frameborder=0
                        'allowfullscreen'></iframe>`
@@ -32,8 +34,8 @@ export default class YoukuParser extends BaseParser {
                         src='http://player.youku.com/player.php/sid/${args.vid}/v.swf'
                         allowFullScreen='true'
                         quality='high'
-                        width='${this.width}'
-                        height='${this.height}'
+                        width='${width}'
+                        height='${height}'
                         align='middle' allowScriptAccess='always'
                         type='application/x-shockwave-flash'>
                     </embed>`

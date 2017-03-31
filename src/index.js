@@ -18,15 +18,15 @@ class VideoParser {
         this.youtube = new YoutubeParser({width: props.width, height: props.height})
     }
 
-    getEmbedTag(link) {
+    getEmbedTag(link, size={}) {
         if(link.includes('bilibili')) {
-            return this.bilibili.getEmbedTag(this.tagType, link)
+            return this.bilibili.getEmbedTag(this.tagType, link, size)
         } else if (link.includes('youku')) {
-            return this.youku.getEmbedTag(this.tagType, link)
+            return this.youku.getEmbedTag(this.tagType, link, size)
         } else if (link.includes('tudou')) {
-            return this.tudou.getEmbedTag(this.tagType, link)
+            return this.tudou.getEmbedTag(this.tagType, link, size)
         } else if (link.includes('youtube')) {
-            return this.youtube.getEmbedTag(this.tagType, link)
+            return this.youtube.getEmbedTag(this.tagType, link, size)
         }
     }
 }

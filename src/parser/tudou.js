@@ -46,7 +46,9 @@ export default class TudouParser extends BaseParser {
         }
     }
 
-    getEmbedTag(tagType, link) {
+    getEmbedTag(tagType, link, size) {
+        let width = size.width || this.width
+        let height = size.height || this.height
         let args = this.parseArgsFromLink(link)
         let tpl = ''
         if(args) {
@@ -60,7 +62,7 @@ export default class TudouParser extends BaseParser {
                         scrolling="no"
                         border="0"
                         frameborder="0"
-                        style="width:${this.width}px;height:${this.height}px;">
+                        style="width:${width}px;height:${height}px;">
                     </iframe>`
                     break
                 case 'embed':
@@ -69,8 +71,8 @@ export default class TudouParser extends BaseParser {
                         allowscriptaccess="always"
                         allowfullscreen="true"
                         wmode="opaque"
-                        width="${this.width}"
-                        height="${this.height}"></embed>`
+                        width="${width}"
+                        height="${height}"></embed>`
                     break
                 case 'flash':
                     tpl = `http://www.tudou.com/l/${args.code}/v.swf`

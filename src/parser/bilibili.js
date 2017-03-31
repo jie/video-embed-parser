@@ -16,16 +16,17 @@ export default class BilibiliParser extends BaseParser {
         }
     }
 
-    getEmbedTag(tagType, link) {
-        console.log(tagType)
+    getEmbedTag(tagType, link, size) {
+        let width = size.width || this.width
+        let height = size.height || this.height
         let args = this.parseArgsFromLink(link)
         let tpl = ''
         if(args) {
             switch(tagType) {
                 case 'embed':
                     tpl = `<embed
-                        height="${this.height}"
-                        width="${this.width}"
+                        height="${height}"
+                        width="${width}"
                         quality="high"
                         allowfullscreen="true"
                         type="application/x-shockwave-flash"
@@ -37,8 +38,8 @@ export default class BilibiliParser extends BaseParser {
                 case 'iframe':
                     tpl = `<iframe
                         src="http://www.bilibili.com/html/html5player.html?aid=${args.aid}"
-                        width="640"
-                        height="480"
+                        width="${width}"
+                        height="${height}"
                         frameborder="0"
                         webkitallowfullscreen mozallowfullscreen allowfullscreen>
                     </iframe>`

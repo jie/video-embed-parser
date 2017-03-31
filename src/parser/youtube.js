@@ -16,15 +16,17 @@ export default class YoutubeParser extends BaseParser {
         }
     }
 
-    getEmbedTag(tagType, link) {
+    getEmbedTag(tagType, link, size) {
+        let width = size.width || this.width
+        let height = size.height || this.height
         let args = this.parseArgsFromLink(link)
         let tpl = ''
         if(args) {
             switch(tagType) {
                 case 'iframe':
                     tpl = `<iframe
-                        width="${this.width}"
-                        height="${this.height}"
+                        width="${width}"
+                        height="${height}"
                         src="https://www.youtube.com/embed/${args.vid}"
                         frameborder="0"
                         allowfullscreen>
@@ -35,8 +37,8 @@ export default class YoutubeParser extends BaseParser {
                         src="http://www.youtube.com/v/${args.vid}?version=3&rel=0&amp;autohide=1&amp"
                         wmode="transparent"
                         type="application/x-shockwave-flash"
-                        width="${this.width}"
-                        height="${this.height}"
+                        width="${width}"
+                        height="${height}"
                         allowfullscreen="true"
                         title="Adobe Flash Player">
                     </embed>`
