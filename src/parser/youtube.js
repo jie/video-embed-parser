@@ -25,10 +25,21 @@ export default class YoutubeParser extends BaseParser {
                     tpl = `<iframe
                         width="${this.width}"
                         height="${this.height}"
-                        src="https://www.youtube.com/embed/${vid}"
+                        src="https://www.youtube.com/embed/${args.vid}"
                         frameborder="0"
                         allowfullscreen>
                     </iframe>`
+                    break
+                case 'embed':
+                    tpl = `<embed
+                        src="http://www.youtube.com/v/${args.vid}?version=3&rel=0&amp;autohide=1&amp"
+                        wmode="transparent"
+                        type="application/x-shockwave-flash"
+                        width="${this.width}"
+                        height="${this.height}"
+                        allowfullscreen="true"
+                        title="Adobe Flash Player">
+                    </embed>`
                     break
                 default:
                     console.warn(`unsupported tagtype: ${tagType}`)
